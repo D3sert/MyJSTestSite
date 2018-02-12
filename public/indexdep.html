@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Light Theme</title>
+	<link href="css/simpleGridTemplate.css" rel="stylesheet" type="text/css">
+	<link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet" type="text/css">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="flatUI.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="js/main.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+
+	<script>
+        var socket = io();
+
+$(function() {
+	socket.on('Displayme',function(string){
+	console.log('here now');
+
+		var para = document.createElement("p");
+		var node = document.createTextNode(string);
+		para.appendChild(node);
+
+		var element = document.getElementById("empty");
+		element.appendChild(para);
+	});
+    
+      $('form').submit(function(){
+      socket.emit('chat message', $('#chat').val());
+      $('#chat').val('');
+      return false;
+    });
+    socket.on('chat message', function(msg){
+      $('#messages').append($('<li>').text(msg));
+    });
+});
+        
+function hideshow(id) {
+    var x = document.getElementById(id);
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+};
+function ClearMe() {
+    $(messages).empty();    
+}
+
+
+
+	</script>
+</head>
+
+<body>
+<div class="w3-content">
+  <header class="w3-card w3-grey">
+    <h4 class="logo">Page of Pages</h4>
+  </header>
+  <div class="w3-card">
+    <section class="w3-card w3-flat-peter-river w3-padding-32">
+      <div class="w3-row">
+        <div class="w3-col m2 l2 w3-image">
+          <h3 class="w3-text-blue-gray">Tim Schmid</h3>
+          <img src="images/profile.png" alt="" class="profile"></div>
+        <div class="w3-rest w3-text-blue-grey">
+          <p style="font-size:40px">The One and Only!</p>
+          <p style="font-size:23px">This is an attempt at Creating what is to be a foundation for future endavours.</p>
+          <p style="font-size:23px">Cheers to you mate for Visitng!</p>
+        </div>
+      </div>
+</section>
+    <div class="w3-card w3-center" style="width: 75%">
+      <div class="thumbnail w3-container"> <a href="#"><img src="images/Google_Sheets.png" alt="" width="50%" class="cards w3-round" align="middle" onclick="hideshow('box1');"/></a>
+        <div id="box1">
+          <h4>Script 1</h4>
+          <p class="tag">Execute and Prints GetGoogle Function</p>
+          <div>
+            <p>Explaination: <br>
+              Uses Edit-Google-Library to Access and Print data from Spreadsheet.</p>
+          </div>
+          <div class="buttondark" onclick="Go(1);">This Activates the Function <br>
+            Hopefully.</div>
+        </div>
+      </div>
+      <div class="thumbnail w3-container"> <a href="#"><img src="images/chat_img.png" alt="" width="2000" class="cards w3-round" onclick="hideshow('box2');"/>
+        <div id="box2">
+          <h4>Script 2</h4>
+          <p class="tag">Chat with the Maker<br>
+            again Hopefully.</p>
+          <p class="text_column">Explaination:<br>
+            Uses Socket.IO example Script. </p>
+          <div class="buttondark" onclick="ClearMe();">Clear All</div>
+        </div>
+      </a></div>
+      <div class="thumbnail w3-container"> <a href="#"><img src="images/bkg_06.jpg" alt="" width="2000" class="cards w3-round" align="middle" onclick="hideshow('box3');"/></a>
+        <div id="box3">
+          <h4>Script 3</h4>
+          <p class="tag">HTML, CSS, JS, WordPress</p>
+          <p class="text_column">Explaination.</p>
+        </div>
+      </div>
+      <div class="thumbnail"> <a href="#"><img src="images/bkg_06.jpg" alt="" width="2000" class="cards w3-round" onclick="hideshow('box4');"/></a>
+        <div id="box4">
+          <h4>Script 4</h4>
+          <p class="tag">HTML, CSS, JS, WordPress</p>
+          <p class="text_column">Explaination.</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="w3-container">
+        <div class="w3-card"><a href="#"><img src="images/Chat_img.png" alt="" width="50%" class="w3-round" id="chatlogo" align="middle"/></a></div>
+        <div class="w3-card">
+          <ul class="text-left" id="messages">
+          </ul>
+        </div>
+        <form action="">
+        <div class="w3-row">
+            <div class="w3-half">
+                <input class=" w3-border w3-input" id="chat" style="width: 50%"/>
+            </div>
+            <div class="w3-rest">
+                <button class="w3-button w3-border">Send</button>
+            </div>
+          
+          
+        </div>
+            </form>
+      </div>
+    </div>
+    <div id="empty"> </div>
+  
+    <div></div>
+  </div>
+  <footer class="w3-card w3-light-gray">
+    <footer class="w3-center" id="contact">
+      <div class="copyright">&copy;2015 - <strong>GRID</strong></div>
+      <p class="hero_header">GET IN TOUCH WITH ME</p>
+      <div class="button">EMAIL ME </div>
+    </footer>
+</footer>
+</div>
+<!-- Main Container -->
+	<!-- Main Container Ends -->
+
+</body>
+
+</html>
